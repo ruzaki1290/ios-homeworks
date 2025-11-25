@@ -10,13 +10,18 @@ import UIKit
 // Создаем кастомный UIView с двумя инициализаторами(стандартная структура)
 class ProfileHeaderView: UIView {
     
+    // MARK: - Subviews
+    
     // 1-a. Создаем объект аватара класса UIImageView
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "snowboarding")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill // За счет данного свойства, фото заполняет всю область imageView
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill // Если изображение портрет, либо ландшафт, то данный метод поможет ему заполнить весь квадрат, и скругление будет ровным по окружности
+        imageView.layer.cornerRadius = 50 // Задаем круглую форму аватарке
+        imageView.layer.borderWidth = 3 // Задаем толщину рамки
+        imageView.layer.borderColor = UIColor.white.cgColor // Задаем цвет рамки
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -28,6 +33,7 @@ class ProfileHeaderView: UIView {
         label.text = "Рустам Закиров"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -37,39 +43,52 @@ class ProfileHeaderView: UIView {
         label.text = "Best season of the year"
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    // 1-d. Добавляем action кнопку Show Status
+    // 1-d. Создаем объект TextField(поле ввода статуса)
+    private let statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Введите новый статус"
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 12
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.font = UIFont.systemFont(ofSize: 14)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    // 1-e. Добавляем action кнопку Show Status
     private let statusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Показать статус", for: .normal)
+        button.setTitle("Обновить статус", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
+        
+        // Добавляем тень кнопки
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowOpacity = 0.7
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    // MARK: - Init
     
     // Инициализатор при создании через код
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // 2. Добовляем объекты аватара, имени, статуса как subview и кнопки статуса
-        addSubview(avatarImageView)
-        addSubview(nameLabel)
-        addSubview(statusLabel)
-        addSubview(statusButton)
-        
+        backgroundColor = .lightGray
+        setupSubviews() // Вызываем метод добавления subviews
+        setupConstraints() // Вызываем метод расставления элементов по Auto Layout
         // Добавляем target кнопки statusButton
         statusButton.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
-        
-        // 4-d. Добавляем тень кнопки
-        statusButton.layer.shadowColor = UIColor.black.cgColor
-        statusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
-        statusButton.layer.shadowRadius = 4
-        statusButton.layer.shadowOpacity = 0.7
-
     }
     
     // Инициализатор для Storyboard/XIB
@@ -77,50 +96,62 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) Ошибка в использовании класса!")
     }
     
-    // 3-a. Задаем фрейм аватарки
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // Проверяем размер HeaderView(хедера)
-        // print("LAYOUT:", bounds)
-        
-        let avatarSize: CGFloat = 100
-        avatarImageView.frame = CGRect(
-            x: 16,
-            y: 16,
-            width: avatarSize,
-            height: avatarSize
-        )
-        
-        avatarImageView.layer.cornerRadius = avatarSize / 2
-        
-        // 3-b. Задаем расположение nameLabel
-        nameLabel.frame = CGRect(
-            x: avatarImageView.frame.maxX + 27,
-            y: avatarImageView.frame.minY + 16,
-            width: bounds.width - avatarImageView.frame.maxX - 40,
-            height: 22
-        )
-        
-        // 3-c. Задаем расположение statusLabel
-        statusLabel.frame = CGRect(
-            x: nameLabel.frame.minX,
-            y: nameLabel.frame.maxY + 4,
-            width: nameLabel.frame.width,
-            height: 18
-        )
-        
-        // 3-d. Добавляем фрейм кнопки statusButton
-        statusButton.frame = CGRect(
-            x: 16,
-            y: statusLabel.frame.maxY + 34,
-            width: bounds.width - 32,
-            height: 50
-        )
+    // MARK: - Setup
+    
+    // 2. Добовляем объекты аватара, имени, статуса как subview и кнопки статуса
+    private func setupSubviews() {
+        addSubview(avatarImageView)
+        addSubview(nameLabel)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        addSubview(statusButton)
     }
     
-    // 5-d. Добавляем действие к кнопке
+    // 3. Задаем положение и размер элементов по Auto Layout
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            
+            // 3-a. Задаем фрейм аватарки
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            // 3-b. Задаем констрейнты расположения nameLabel
+            nameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 8),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            // 3-c. Задаем констрейнты расположения statusLabel
+            statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+
+            // 3-d. Задамем констрейнты расположения statusField
+            statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            statusTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            // 3-e. Добавляем фрейм кнопки statusButton
+            statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 12),
+            statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 44)
+            
+        ])
+    }
+        
+    // MARK: - Actions
+    
+    // 5-e. Добавляем действие к кнопке
     @objc private func showStatus() {
-        print("Статус: \(statusLabel.text ?? "")")
+        if let text = statusTextField.text, !text.isEmpty {
+            statusLabel.text = text
+            statusTextField.text = ""
+        } else {
+            print("Введите статус!")
+        }
     }
 
 }
