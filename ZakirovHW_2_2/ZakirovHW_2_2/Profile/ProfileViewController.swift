@@ -31,17 +31,18 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .lightGray
         
-        // Добавляем метод headerView внутрь корневого view
+        // Метод headerView внутрь корневого view
         setupHeaderView()
         
-        // Добавляем метод bottomButton внутрь корневого view
+        // Метод bottomButton внутрь корневого view
         setupBottomButton()
         
         // Проверка загрузки View Controller
         // print("PROFILE VIEW DID LOAD! ✅")
         
-        // Добавляем метод нажатия нижней кнопки
+        // Метод нажатия нижней кнопки
         bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
+        
     }
     
     // Переопределяем метод жиз. цикла UIViewController перед тем, как UIKit начнет расстановку всех subviews на экране

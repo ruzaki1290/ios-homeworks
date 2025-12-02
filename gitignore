@@ -4,7 +4,7 @@
 # Благодаря этому в репозитории остаются только важные файлы проекта.
 
 # Xcode
-DerivedData/
+DerivedDatпa/
 build/ 
 *.pbxuser 
 !default.pbxuser 
