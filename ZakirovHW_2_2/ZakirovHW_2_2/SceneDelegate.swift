@@ -22,10 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         // 2. Создаем два корневых контроллера(лента и профиль)
+        // Лента
         let feedVC = FeedViewController()
         feedVC.title = "Feed"
-        
-        let profileVC = ProfileViewController()
+        // Профиль
+        let profileVC = LogInViewController()
         profileVC.title = "Profile"
         
         // 3. Оборачиваем контроллеры в UINavigationController
