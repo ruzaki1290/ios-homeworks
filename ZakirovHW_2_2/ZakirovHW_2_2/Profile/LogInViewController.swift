@@ -207,7 +207,7 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
     
-    // MARK: - setupConstraints
+    // MARK: - Constraints
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
