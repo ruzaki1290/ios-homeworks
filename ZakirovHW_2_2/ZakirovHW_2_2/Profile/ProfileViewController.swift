@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     private let tableView: UITableView = {
         
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        // tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -78,7 +78,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        #if DEBUG
+        view.backgroundColor = .systemYellow
+        #else
+        view.backgroundColor = .systemIndigo
+        #endif
+        
+        // view.backgroundColor = .white
         title = "Profile"
         
         view.addSubview(tableView)
