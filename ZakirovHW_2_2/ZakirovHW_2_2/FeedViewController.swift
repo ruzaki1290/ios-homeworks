@@ -9,8 +9,14 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let post = Post(title: "Мой первый пост! 😎")
-    
+    let post = Post(
+        author: "Rus",
+        description: "Test description",
+        image: "post1",
+        likes: 0,
+        views: 0
+    )
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

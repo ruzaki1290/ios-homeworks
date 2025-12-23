@@ -10,8 +10,7 @@ import UIKit
 // Создаем кастомный UIView с двумя инициализаторами(стандартная структура)
 class ProfileHeaderView: UIView {
     
-    // MARK: - Subviews
-    
+// MARK: - Subviews
     // 1-a. Создаем объект аватара класса UIImageView
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -22,10 +21,9 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3 // Задаем толщину рамки
         imageView.layer.borderColor = UIColor.white.cgColor // Задаем цвет рамки
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
-    
-    
     
     // 1-b. Создаем объект имени класса Label
     private let nameLabel: UILabel = {
@@ -34,6 +32,7 @@ class ProfileHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -44,6 +43,7 @@ class ProfileHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .darkGray
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -56,7 +56,12 @@ class ProfileHeaderView: UIView {
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.font = UIFont.systemFont(ofSize: 14)
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
+        textField.leftViewMode = .always
+
+        
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
         return textField
     }()
     
@@ -76,11 +81,11 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
-    // MARK: - Init
-    
+// MARK: - Init
     // Инициализатор при создании через код
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,8 +101,7 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) Ошибка в использовании класса!")
     }
     
-    // MARK: - Setup
-    
+// MARK: - Setup
     // 2. Добовляем объекты аватара, имени, статуса как subview и кнопки статуса
     private func setupSubviews() {
         addSubview(avatarImageView)
@@ -128,7 +132,7 @@ class ProfileHeaderView: UIView {
             statusLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
 
             // 3-d. Задамем констрейнты расположения statusField
-            statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 26),
             statusTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
@@ -142,8 +146,7 @@ class ProfileHeaderView: UIView {
         ])
     }
         
-    // MARK: - Actions
-    
+// MARK: - Actions
     // 5-e. Добавляем действие к кнопке
     @objc private func showStatus() {
         if let text = statusTextField.text, !text.isEmpty {

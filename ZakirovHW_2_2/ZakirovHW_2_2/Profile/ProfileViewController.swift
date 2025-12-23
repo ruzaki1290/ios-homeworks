@@ -10,75 +10,154 @@ import UIKit
 // Создаем класс-контроллер целого экрана и наследуем класс жизненного цикла UIViewController
 class ProfileViewController: UIViewController {
     
-    // Создаем экземпляр шапки профиля
-    private let headerView = ProfileHeaderView()
     
-    // Добовляем объект нижней кнопки
-    private let bottomButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Удалить аккаунт", for: .normal)
-        button.backgroundColor = .systemRed
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    
+    // MARK: - Свойства
+    private let tableView: UITableView = {
+        
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+        
     }()
     
+// MARK: - Header таблицы
+    private let profileHeaderView = ProfileHeaderView()
+    
+// MARK: - Posts
+    private let posts: [Post] = [
+        Post(
+            author: "Rus",
+            description: "Best season of the year",
+            image: "post1",
+            likes: 240,
+            views: 312
+        ),
+        Post(
+            author: "Igor",
+            description: "What a great trip",
+            image: "post2",
+            likes: 766,
+            views: 893
+        ),
+        Post(
+            author: "Dima",
+            description: "The best oysters in town!",
+            image: "post3",
+            likes: 1024,
+            views: 2048
+        ),
+        Post(
+            author: "Alice",
+            description: "What were they building there?",
+            image: "post4",
+            likes: 768,
+            views: 1234
+        ),
+        Post(
+            author: "Nika",
+            description: "What a delecious snack!",
+            image: "post5",
+            likes: 834,
+            views: 1558
+        ),
+        Post(
+            author: "Mike",
+            description: "Memories of summer",
+            image: "post6",
+            likes: 644,
+            views: 1234
+        )
+    ]
+    
+// MARK: - viewDidLoad()
     // Переопределяем поведение родительского метода жизненного цикла UIViewController viewDidLoad() при загрузке экрана
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
+        title = "Profile"
         
-        // Метод headerView внутрь корневого view
-        setupHeaderView()
+        view.addSubview(tableView)
+        setupTableViewConstraints()
         
-        // Метод bottomButton внутрь корневого view
-        setupBottomButton()
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        // Проверка загрузки View Controller
-        // print("PROFILE VIEW DID LOAD! ✅")
+        tableView.register(
+            PostTableViewCell.self,
+            forCellReuseIdentifier: PostTableViewCell.reuseID
+        )
         
-        // Метод нажатия нижней кнопки
-        bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 400
+        
+        profileHeaderView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.width,
+            height: 300
+        )
+        
+        tableView.tableHeaderView = profileHeaderView
         
     }
     
-    // Переопределяем метод жиз. цикла UIViewController перед тем, как UIKit начнет расстановку всех subviews на экране
-    private func setupHeaderView() {
-           view.addSubview(headerView)
-           headerView.translatesAutoresizingMaskIntoConstraints = false
-           
-           NSLayoutConstraint.activate([
-               // Сверху к safe area
-               headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-               
-               // Слева и справа без отступов
-               headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-               headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-               
-               // Фиксированная высота
-               headerView.heightAnchor.constraint(equalToConstant: 220)
-           ])
-       }
-    
-    // Создаем объект setupBottomButton
-    private func setupBottomButton() {
-        view.addSubview(bottomButton)
-
+// MARK: - Constraints
+    private func setupTableViewConstraints() {
+        
         NSLayoutConstraint.activate([
-            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: 50)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
     }
     
-    // Добовляем action к bottomButton
-    @objc private func bottomButtonTapped() {
-        print("Нажата нижняя кнопка!")
+} // ProfileViewController
+
+// MARK: - UITableViewDataSource
+    extension ProfileViewController: UITableViewDataSource {
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return posts.count
+        }
+        
+        func tableView(_ tableView: UITableView,
+                       cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: PostTableViewCell.reuseID,
+                for: indexPath
+            ) as! PostTableViewCell
+            
+            // Берем модель
+            let post = posts[indexPath.row]
+            // Передаем в ячейку
+            cell.configure(with: post)
+
+            return cell
+        }
+        
     }
 
+// MARK: - UITableViewDelegate
+    extension ProfileViewController: UITableViewDelegate {
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            let selectedPost = posts[indexPath.row]
+            
+            let postVC = PostViewController()
+            postVC.post = selectedPost
+            
+            navigationController?.pushViewController(postVC, animated: true)
+            
+        }
+        
+    }
 
-}

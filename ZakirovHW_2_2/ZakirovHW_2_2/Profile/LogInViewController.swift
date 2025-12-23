@@ -42,11 +42,7 @@ class LogInViewController: UIViewController {
         textField.tintColor = .systemBlue
         textField.autocapitalizationType = .none
         
-        textField.backgroundColor = .systemGray6
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
-        
+        // Отступ текста слева
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         textField.leftViewMode = .always
         
@@ -65,17 +61,38 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         
-        textField.backgroundColor = .systemGray6
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
-        
+        // Отступ текста слева
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         textField.leftViewMode = .always
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
+    }()
+    
+    // StackView для текстфилдов
+    private let textFieldsStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 0
+        stackView.backgroundColor = .systemGray6
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.cornerRadius = 10
+        stackView.clipsToBounds = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    // Разделитель между textFields
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
     }()
     
     // Поле кнопки логина
@@ -109,12 +126,16 @@ class LogInViewController: UIViewController {
         // Добавляем логотип в contentView
         contentView.addSubview(logoImageView)
         
-        // Добавляем поле логина в contentView
-        contentView.addSubview(loginField)
+        // Добавляем stackView в contentView
+        contentView.addSubview(textFieldsStack)
         
-        // Добавляем поле пароля в contentView
-        contentView.addSubview(passwordField)
+        textFieldsStack.addArrangedSubview(loginField)
+        textFieldsStack.addArrangedSubview(separatorView)
+        textFieldsStack.addArrangedSubview(passwordField)
         
+        loginField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        passwordField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         // Добавляем кнопку логина в contentView
         contentView.addSubview(loginButton)
         
@@ -185,7 +206,8 @@ class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = 0
         scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
-    // MARK: - setupConstraints
+    
+    // MARK: - Constraints
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
@@ -210,17 +232,13 @@ class LogInViewController: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            // Констрейнты поля логина
-            loginField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            loginField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            loginField.heightAnchor.constraint(equalToConstant: 50),
+            // Констрейнты stackView
+            textFieldsStack.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
+            textFieldsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textFieldsStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            textFieldsStack.heightAnchor.constraint(equalToConstant: 100),
             
-            // Констрейнты поля пароля
-            passwordField.topAnchor.constraint(equalTo: loginField.bottomAnchor),
-            passwordField.leadingAnchor.constraint(equalTo: loginField.leadingAnchor),
-            passwordField.trailingAnchor.constraint(equalTo: loginField.trailingAnchor),
-            passwordField.heightAnchor.constraint(equalToConstant: 50),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             
             // Констрейнты кнопки логина
             loginButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 16),
@@ -237,5 +255,6 @@ class LogInViewController: UIViewController {
         navigationController?.pushViewController(ProfileViewController(), animated: true)
 
     }
+
 
 }
