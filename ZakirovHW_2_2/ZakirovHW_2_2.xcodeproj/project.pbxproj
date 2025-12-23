@@ -6,25 +6,69 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		650BB6E72EFAE117004BAB03 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650BB6DF2EFAE117004BAB03 /* StorageService.framework */; };
+		650BB6E82EFAE117004BAB03 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 650BB6DF2EFAE117004BAB03 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		650BB6E52EFAE117004BAB03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 658BEAFE2ED4B9BB00B81479 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 650BB6DE2EFAE117004BAB03;
+			remoteInfo = StorageService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		650BB6E92EFAE117004BAB03 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				650BB6E82EFAE117004BAB03 /* StorageService.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		650BB6DF2EFAE117004BAB03 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		658BEB062ED4B9BB00B81479 /* ZakirovHW_2_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZakirovHW_2_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		650BB6EE2EFAE1DE004BAB03 /* Exceptions for "ZakirovHW_2_2" folder in "StorageService" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Post.swift,
+			);
+			target = 650BB6DE2EFAE117004BAB03 /* StorageService */;
+		};
 		658BEB1B2ED4B9BB00B81479 /* Exceptions for "ZakirovHW_2_2" folder in "ZakirovHW_2_2" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Post.swift,
 			);
 			target = 658BEB052ED4B9BB00B81479 /* ZakirovHW_2_2 */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		650BB6E02EFAE117004BAB03 /* StorageService */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StorageService;
+			sourceTree = "<group>";
+		};
 		658BEB082ED4B9BB00B81479 /* ZakirovHW_2_2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				658BEB1B2ED4B9BB00B81479 /* Exceptions for "ZakirovHW_2_2" folder in "ZakirovHW_2_2" target */,
+				650BB6EE2EFAE1DE004BAB03 /* Exceptions for "ZakirovHW_2_2" folder in "StorageService" target */,
 			);
 			path = ZakirovHW_2_2;
 			sourceTree = "<group>";
@@ -32,10 +76,18 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		650BB6DC2EFAE117004BAB03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		658BEB032ED4B9BB00B81479 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650BB6E72EFAE117004BAB03 /* StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				658BEB082ED4B9BB00B81479 /* ZakirovHW_2_2 */,
+				650BB6E02EFAE117004BAB03 /* StorageService */,
 				658BEB072ED4B9BB00B81479 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,13 +107,47 @@
 			isa = PBXGroup;
 			children = (
 				658BEB062ED4B9BB00B81479 /* ZakirovHW_2_2.app */,
+				650BB6DF2EFAE117004BAB03 /* StorageService.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		650BB6DA2EFAE117004BAB03 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		650BB6DE2EFAE117004BAB03 /* StorageService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 650BB6EC2EFAE117004BAB03 /* Build configuration list for PBXNativeTarget "StorageService" */;
+			buildPhases = (
+				650BB6DA2EFAE117004BAB03 /* Headers */,
+				650BB6DB2EFAE117004BAB03 /* Sources */,
+				650BB6DC2EFAE117004BAB03 /* Frameworks */,
+				650BB6DD2EFAE117004BAB03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				650BB6E02EFAE117004BAB03 /* StorageService */,
+			);
+			name = StorageService;
+			packageProductDependencies = (
+			);
+			productName = StorageService;
+			productReference = 650BB6DF2EFAE117004BAB03 /* StorageService.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		658BEB052ED4B9BB00B81479 /* ZakirovHW_2_2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 658BEB1C2ED4B9BB00B81479 /* Build configuration list for PBXNativeTarget "ZakirovHW_2_2" */;
@@ -68,10 +155,12 @@
 				658BEB022ED4B9BB00B81479 /* Sources */,
 				658BEB032ED4B9BB00B81479 /* Frameworks */,
 				658BEB042ED4B9BB00B81479 /* Resources */,
+				650BB6E92EFAE117004BAB03 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				650BB6E62EFAE117004BAB03 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				658BEB082ED4B9BB00B81479 /* ZakirovHW_2_2 */,
@@ -93,6 +182,9 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					650BB6DE2EFAE117004BAB03 = {
+						CreatedOnToolsVersion = 26.1;
+					};
 					658BEB052ED4B9BB00B81479 = {
 						CreatedOnToolsVersion = 26.1;
 					};
@@ -113,11 +205,19 @@
 			projectRoot = "";
 			targets = (
 				658BEB052ED4B9BB00B81479 /* ZakirovHW_2_2 */,
+				650BB6DE2EFAE117004BAB03 /* StorageService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		650BB6DD2EFAE117004BAB03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		658BEB042ED4B9BB00B81479 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +228,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		650BB6DB2EFAE117004BAB03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		658BEB022ED4B9BB00B81479 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +244,89 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		650BB6E62EFAE117004BAB03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 650BB6DE2EFAE117004BAB03 /* StorageService */;
+			targetProxy = 650BB6E52EFAE117004BAB03 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		650BB6EA2EFAE117004BAB03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.exercise.fourth.StorageService;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		650BB6EB2EFAE117004BAB03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.exercise.fourth.StorageService;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		658BEB1D2ED4B9BB00B81479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +521,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		650BB6EC2EFAE117004BAB03 /* Build configuration list for PBXNativeTarget "StorageService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				650BB6EA2EFAE117004BAB03 /* Debug */,
+				650BB6EB2EFAE117004BAB03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		658BEB012ED4B9BB00B81479 /* Build configuration list for PBXProject "ZakirovHW_2_2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

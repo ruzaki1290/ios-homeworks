@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 // Создаем класс-контроллер целого экрана и наследуем класс жизненного цикла UIViewController
 class ProfileViewController: UIViewController {
